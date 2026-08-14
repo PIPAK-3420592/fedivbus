@@ -142,7 +142,7 @@ src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
       <form id="permis-form" onsubmit="return handlePermisSubmit(event)">
         <div class="form-group">
           <label>Ім'я та прізвище <span class="required">*</span></label>
-          <input type="text" id="permis-name" placeholder="Наприклад: Іван Петренко" required>
+          <input type="text" id="permis-name" placeholder="Наприклад: Іван Петренко" required pattern="[A-Za-zА-Яа-яЄєІіЇїҐґ'\s\-]+" title="Тільки літери, пробіли, дефіс та апостроф">
           <div class="error-msg" id="name-error">Введіть ім'я та прізвище</div>
         </div>
 
@@ -167,7 +167,7 @@ src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
 
         <div class="form-group">
           <label>Номер телефону <span class="required">*</span></label>
-          <input type="tel" id="permis-phone" placeholder="+38 097 351 59 25" required>
+          <input type="tel" id="permis-phone" placeholder="+380XXXXXXXXX" required pattern="\+38[0-9]{10}" title="Формат: +38 і 10 цифр, наприклад +380973515925">
           <div class="error-msg" id="phone-error">Введіть номер телефону</div>
         </div>
 
@@ -185,6 +185,14 @@ src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
       document.querySelectorAll('.radio-option').forEach(r => r.classList.remove('selected'));
       el.classList.add('selected');
       el.querySelector('input').checked = true;
+    }
+
+    function validateName(name) {
+      return /^[A-Za-zА-Яа-яЄєІіЇїҐґ'\s\-]+$/.test(name);
+    }
+
+    function validatePhone(phone) {
+      return /^\+38[0-9]{10}$/.test(phone);
     }
 
     function hideErrors() {
@@ -205,9 +213,9 @@ src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
       const btn = document.getElementById('submit-btn');
 
       let hasError = false;
-      if (!name) { showError('name-error'); hasError = true; }
+      if (!name || !validateName(name)) { showError('name-error'); hasError = true; }
       if (!statusEl) { showError('status-error'); hasError = true; }
-      if (!phone) { showError('phone-error'); hasError = true; }
+      if (!phone || !validatePhone(phone)) { showError('phone-error'); hasError = true; }
       if (hasError) return false;
 
       const statusMap = {
