@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Румунський перміс — Fediv Bus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%; max-width: 460px;
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .back-btn {
+      background: none; border: none;
+      color: #888; font-size: 15px;
+      cursor: pointer; padding: 8px 0 16px;
+      display: flex; align-items: center;
+      gap: 6px; transition: color 0.2s;
+      font-family: inherit; text-decoration: none;
+    }
+    .back-btn:hover { color: #111; }
+    .form-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #eee;
+    }
+    .form-container h2 {
+      font-size: 24px; font-weight: 700;
+      margin-bottom: 8px; color: #111;
+    }
+    .form-container .subtitle {
+      font-size: 15px; color: #999;
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 14px;
+      font-weight: 500; margin-bottom: 8px;
+      color: #444;
+    }
+    .form-group input {
+      width: 100%; padding: 14px 16px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px; font-size: 16px;
+      transition: all 0.2s; font-family: inherit;
+      background: #fafafa; color: #111;
+    }
+    .form-group input:focus {
+      outline: none; border-color: #111; background: #fff;
+    }
+    .radio-group {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .radio-option {
+      display: flex; align-items: center;
+      padding: 14px 16px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px; cursor: pointer;
+      transition: all 0.2s; background: #fafafa;
+    }
+    .radio-option:hover { border-color: #bbb; background: #f5f5f5; }
+    .radio-option.selected { border-color: #111; background: #f0f0f0; }
+    .radio-option input {
+      width: 20px; height: 20px;
+      margin-right: 14px; accent-color: #111;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .radio-option span { font-size: 15px; color: #333; }
+    .submit-btn {
+      width: 100%; padding: 16px;
+      background: #111; color: #fff;
+      border: none; border-radius: 12px;
+      font-size: 17px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      font-family: inherit; margin-top: 8px;
+    }
+    .submit-btn:hover { background: #333; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled {
+      background: #ccc; cursor: not-allowed; transform: none;
+    }
+    .required { color: #e74c3c; }
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid #fff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-msg {
+      color: #e74c3c; font-size: 13px;
+      margin-top: 6px; display: none;
+    }
+    .error-msg.show { display: block; }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4552942081693738');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Назад</a>
+    <div class="form-container">
+      <h2>Румунський перміс</h2>
+      <p class="subtitle">Заповніть анкету, і наш оператор зв'яжеться з вами</p>
+
+      <form id="permis-form" onsubmit="return handlePermisSubmit(event)">
+        <div class="form-group">
+          <label>Ім'я та прізвище <span class="required">*</span></label>
+          <input type="text" id="permis-name" placeholder="Наприклад: Іван Петренко" required>
+          <div class="error-msg" id="name-error">Введіть ім'я та прізвище</div>
+        </div>
+
+        <div class="form-group">
+          <label>Ваш статус <span class="required">*</span></label>
+          <div class="radio-group">
+            <label class="radio-option" onclick="selectRadio(this)">
+              <input type="radio" name="status" value="man_under_22" required>
+              <span>Чоловік до 22 років</span>
+            </label>
+            <label class="radio-option" onclick="selectRadio(this)">
+              <input type="radio" name="status" value="man_travel" required>
+              <span>Чоловік з можливістю виїзду за кордон</span>
+            </label>
+            <label class="radio-option" onclick="selectRadio(this)">
+              <input type="radio" name="status" value="woman" required>
+              <span>Жіноча стать</span>
+            </label>
+          </div>
+          <div class="error-msg" id="status-error">Оберіть ваш статус</div>
+        </div>
+
+        <div class="form-group">
+          <label>Номер телефону <span class="required">*</span></label>
+          <input type="tel" id="permis-phone" placeholder="+38 097 351 59 25" required>
+          <div class="error-msg" id="phone-error">Введіть номер телефону</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Відправити заявку</button>
+        <div class="error-msg" id="form-error" style="margin-top:12px;text-align:center;">Помилка відправки. Перевірте, що бекенд запущено на localhost:8000</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // === НАЛАШТУВАННЯ: URL бекенду ===
+    const API_URL = '/api/submit';
+
+    function selectRadio(el) {
+      document.querySelectorAll('.radio-option').forEach(r => r.classList.remove('selected'));
+      el.classList.add('selected');
+      el.querySelector('input').checked = true;
+    }
+
+    function hideErrors() {
+      document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+    }
+
+    function showError(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    async function handlePermisSubmit(e) {
+      e.preventDefault();
+      hideErrors();
+
+      const name = document.getElementById('permis-name').value.trim();
+      const phone = document.getElementById('permis-phone').value.trim();
+      const statusEl = document.querySelector('input[name="status"]:checked');
+      const btn = document.getElementById('submit-btn');
+
+      let hasError = false;
+      if (!name) { showError('name-error'); hasError = true; }
+      if (!statusEl) { showError('status-error'); hasError = true; }
+      if (!phone) { showError('phone-error'); hasError = true; }
+      if (hasError) return false;
+
+      const statusMap = {
+        'man_under_22': 'Чоловік до 22 років',
+        'man_travel': 'Чоловік з можливістю виїзду за кордон',
+        'woman': 'Жіноча стать'
+      };
+
+      const data = {
+        service: 'permis',
+        name: name,
+        phone: phone,
+        status: statusMap[statusEl.value]
+      };
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Відправляємо...';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          fbq('track', 'Lead');
+          window.location.href = 'success.html?service=permis&name=' + encodeURIComponent(name);
+        } else {
+          showError('form-error');
+          btn.disabled = false;
+          btn.innerHTML = 'Відправити заявку';
+        }
+      } catch (err) {
+        console.error(err);
+        showError('form-error');
+        btn.disabled = false;
+        btn.innerHTML = 'Відправити заявку';
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fediv Bus — Головна</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%;
+      max-width: 460px;
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    }
+    .logo-area {
+      text-align: center;
+      margin-bottom: 10px;
+      padding-top: 20px;
+      animation: fadeIn 0.8s ease-out;
+    }
+    .logo-area .bus-icon { font-size: 52px; margin-bottom: 8px; }
+    .logo-area .brand {
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      color: #bbb; text-transform: uppercase;
+    }
+    .hero-text {
+      text-align: center;
+      padding: 36px 0 28px;
+      animation: slideUp 0.6s ease-out;
+    }
+    .hero-text h1 {
+      font-size: 30px; font-weight: 700; margin-bottom: 12px;
+      color: #111; line-height: 1.2;
+    }
+    .hero-text p {
+      font-size: 16px; color: #888;
+    }
+    .service-grid {
+      display: grid; gap: 16px;
+      animation: slideUp 0.7s ease-out 0.2s both;
+    }
+    .service-card {
+      background: #fff;
+      border: 2px solid #e8e8e8;
+      border-radius: 16px;
+      padding: 24px 22px;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card:hover {
+      border-color: #111;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+    .service-card:active { transform: translateY(0); }
+    .service-card .icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      background: #f5f5f5; display: flex;
+      align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 14px;
+    }
+    .service-card h3 {
+      font-size: 18px; font-weight: 600;
+      margin-bottom: 6px; color: #111;
+    }
+    .service-card p {
+      font-size: 14px; color: #999;
+      line-height: 1.4; padding-right: 30px;
+    }
+    .service-card .arrow {
+      position: absolute; right: 22px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 22px; color: #ccc;
+      transition: all 0.25s;
+    }
+    .service-card:hover .arrow {
+      color: #111;
+      transform: translateY(-50%) translateX(3px);
+    }
+    .footer-note {
+      text-align: center; font-size: 13px;
+      color: #bbb; margin-top: 24px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4552942081693738');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="container">
+    <div class="logo-area">
+      <div class="bus-icon">🚌</div>
+      <div class="brand">Fediv Bus</div>
+    </div>
+    <div class="hero-text">
+      <h1>Привіт! 👋</h1>
+      <p>Виберіть потрібну категорію послуги</p>
+    </div>
+    <div class="service-grid">
+      <a href="permis.html" class="service-card">
+        <div class="icon">📋</div>
+        <h3>Румунський перміс</h3>
+        <p>Допомога українцям в оформленні тимчасового захисту в Румунії</p>
+        <span class="arrow">›</span>
+      </a>
+      <a href="bus.html" class="service-card">
+        <div class="icon">🚐</div>
+        <h3>Міжнародні перевезення</h3>
+        <p>Пасажирські перевезення Україна — Німеччина</p>
+        <span class="arrow">›</span>
+      </a>
+    </div>
+    <p class="footer-note">Надійні послуги для українців</p>
+  </div>
+</body>
+</html>

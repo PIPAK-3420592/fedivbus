@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Заявку прийнято — Fediv Bus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%; max-width: 460px;
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .check {
+      width: 72px; height: 72px;
+      background: #111; color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center; justify-content: center;
+      font-size: 32px;
+      margin: 40px auto 28px;
+      animation: pulse 0.5s ease-out;
+    }
+    h2 {
+      font-size: 26px; font-weight: 700;
+      margin-bottom: 14px; color: #111;
+    }
+    p {
+      font-size: 16px; color: #777;
+      line-height: 1.6; margin-bottom: 8px;
+    }
+    .details {
+      background: #fff;
+      border-radius: 14px;
+      padding: 20px;
+      margin: 24px 0;
+      border: 1px solid #eee;
+      text-align: left;
+    }
+    .details p {
+      font-size: 14px; color: #555;
+      margin-bottom: 6px;
+    }
+    .details .label {
+      color: #999; font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px; font-weight: 600;
+      margin-bottom: 4px;
+    }
+    .home-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: #111; color: #fff;
+      border: none; border-radius: 12px;
+      font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      font-family: inherit;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .home-btn:hover { background: #333; transform: translateY(-1px); }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4552942081693738');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="container">
+    <div class="check">✓</div>
+    <h2>Заявку прийнято!</h2>
+    <p>Дякуємо за звернення.<br>Наш оператор скоро зв'яжеться з вами.</p>
+
+    <div class="details" id="details-box" style="display:none;">
+      <p class="label">Послуга</p>
+      <p id="service-name"></p>
+      <p class="label" style="margin-top:10px;">Ім'я</p>
+      <p id="client-name"></p>
+    </div>
+
+    <a href="index.html" class="home-btn">На головну</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const name = params.get('name');
+
+    if (service && name) {
+      document.getElementById('details-box').style.display = 'block';
+      document.getElementById('client-name').textContent = decodeURIComponent(name);
+
+      if (service === 'permis') {
+        document.getElementById('service-name').textContent = '📋 Румунський перміс';
+      } else {
+        document.getElementById('service-name').textContent = '🚐 Міжнародні перевезення';
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Перевезення — Fediv Bus</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f2f7;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      width: 100%; max-width: 460px;
+      background: #fafafa;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .back-btn {
+      background: none; border: none;
+      color: #888; font-size: 15px;
+      cursor: pointer; padding: 8px 0 16px;
+      display: flex; align-items: center;
+      gap: 6px; transition: color 0.2s;
+      font-family: inherit; text-decoration: none;
+    }
+    .back-btn:hover { color: #111; }
+    .form-container {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid #eee;
+    }
+    .form-container h2 {
+      font-size: 24px; font-weight: 700;
+      margin-bottom: 8px; color: #111;
+    }
+    .form-container .subtitle {
+      font-size: 15px; color: #999;
+      margin-bottom: 20px;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label {
+      display: block; font-size: 14px;
+      font-weight: 500; margin-bottom: 8px;
+      color: #444;
+    }
+    .form-group input,
+    .form-group select {
+      width: 100%; padding: 14px 16px;
+      border: 1.5px solid #e5e5e5;
+      border-radius: 12px; font-size: 16px;
+      transition: all 0.2s; font-family: inherit;
+      background: #fafafa; color: #111;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none; border-color: #111; background: #fff;
+    }
+    .submit-btn {
+      width: 100%; padding: 16px;
+      background: #111; color: #fff;
+      border: none; border-radius: 12px;
+      font-size: 17px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
+      font-family: inherit; margin-top: 8px;
+    }
+    .submit-btn:hover { background: #333; transform: translateY(-1px); }
+    .submit-btn:active { transform: translateY(0); }
+    .submit-btn:disabled {
+      background: #ccc; cursor: not-allowed; transform: none;
+    }
+    .required { color: #e74c3c; }
+    .route-badge {
+      display: inline-block; padding: 8px 14px;
+      background: #f5f5f5; border-radius: 20px;
+      font-size: 13px; color: #555;
+      margin: 4px 4px 4px 0;
+      border: 1px solid #e8e8e8; font-weight: 500;
+    }
+    .routes-info {
+      margin-bottom: 20px; padding: 14px;
+      background: #f8f8f8; border-radius: 12px;
+      border: 1px solid #eee;
+    }
+    .routes-info p {
+      font-size: 11px; color: #aaa;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px; font-weight: 600;
+    }
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid #fff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .error-msg {
+      color: #e74c3c; font-size: 13px;
+      margin-top: 6px; display: none;
+    }
+    .error-msg.show { display: block; }
+  </style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '4552942081693738');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=4552942081693738&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">← Назад</a>
+    <div class="form-container">
+      <h2>Міжнародні перевезення</h2>
+      <p class="subtitle">Заповніть дані для бронювання місця</p>
+
+      <div class="routes-info">
+        <p>Доступні маршрути</p>
+        <span class="route-badge">🇺🇦 Україна — Німеччина 🇩🇪</span>
+        <span class="route-badge">🚌 Берлін — Нойбранденбург</span>
+      </div>
+
+      <form id="bus-form" onsubmit="return handleBusSubmit(event)">
+        <div class="form-group">
+          <label>Ім'я та прізвище <span class="required">*</span></label>
+          <input type="text" id="bus-name" placeholder="Наприклад: Олена Іваненко" required>
+          <div class="error-msg" id="name-error">Введіть ім'я та прізвище</div>
+        </div>
+
+        <div class="form-group">
+          <label>Куди прямуєте? <span class="required">*</span></label>
+          <select id="bus-route" required>
+            <option value="">Оберіть маршрут</option>
+            <option value="ukraine_germany">Україна — Німеччина</option>
+            <option value="berlin_neubrandenburg">Берлін — Нойбранденбург</option>
+          </select>
+          <div class="error-msg" id="route-error">Оберіть маршрут</div>
+        </div>
+
+        <div class="form-group">
+          <label>Номер телефону <span class="required">*</span></label>
+          <input type="tel" id="bus-phone" placeholder="+38 097 351 59 25" required>
+          <div class="error-msg" id="phone-error">Введіть номер телефону</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Забронювати місце</button>
+        <div class="error-msg" id="form-error" style="margin-top:12px;text-align:center;">Помилка відправки. Перевірте, що бекенд запущено на localhost:8000</div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // === НАЛАШТУВАННЯ: URL бекенду ===
+    const API_URL = '/api/submit';
+
+    function hideErrors() {
+      document.querySelectorAll('.error-msg').forEach(e => e.classList.remove('show'));
+    }
+
+    function showError(id) {
+      document.getElementById(id).classList.add('show');
+    }
+
+    async function handleBusSubmit(e) {
+      e.preventDefault();
+      hideErrors();
+
+      const name = document.getElementById('bus-name').value.trim();
+      const route = document.getElementById('bus-route').value;
+      const phone = document.getElementById('bus-phone').value.trim();
+      const btn = document.getElementById('submit-btn');
+
+      let hasError = false;
+      if (!name) { showError('name-error'); hasError = true; }
+      if (!route) { showError('route-error'); hasError = true; }
+      if (!phone) { showError('phone-error'); hasError = true; }
+      if (hasError) return false;
+
+      const routeMap = {
+        'ukraine_germany': '🇺🇦 Україна — Німеччина 🇩🇪',
+        'berlin_neubrandenburg': '🚌 Берлін — Нойбранденбург'
+      };
+
+      const data = {
+        service: 'bus',
+        name: name,
+        phone: phone,
+        route: routeMap[route]
+      };
+
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner"></span>Відправляємо...';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          fbq('track', 'Lead');
+          window.location.href = 'success.html?service=bus&name=' + encodeURIComponent(name);
+        } else {
+          showError('form-error');
+          btn.disabled = false;
+          btn.innerHTML = 'Забронювати місце';
+        }
+      } catch (err) {
+        console.error(err);
+        showError('form-error');
+        btn.disabled = false;
+        btn.innerHTML = 'Забронювати місце';
+      }
+
+      return false;
+    }
+  </script>
+</body>
+</html>
